@@ -31,11 +31,31 @@ exports.insertPass = function(hashPass) {
     );
 };
 
-exports.getUserByEmail = function getUserByEmail(email) {
+exports.getUserByEmail = function(email) {
     return db.query(
         `SELECT * FROM users WHERE email = $1
         `,
         [email]
+    );
+};
+
+exports.loggedUser = function(id) {
+    return db.query(
+        `
+        SELECT id, first, last, bio, image_url
+        FROM users
+        WHERE id = $1`,
+        [id]
+    );
+};
+
+exports.uploadImage = function(id, image_url) {
+    return db.query(
+        `UPDATE users
+        SET image_url = $2
+        WHERE id = $1
+        RETURNING image_url`,
+        [id || null, image_url]
     );
 };
 

@@ -4,6 +4,11 @@ const compression = require("compression");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const cookieSession = require("cookie-session");
+const config = require("./config");
+const s3 = require("./s3.js");
+const multer = require("multer");
+const uidSafe = require("uid-safe");
+const path = require("path");
 const csurf = require("csurf");
 
 const db = require("./db");
@@ -37,6 +42,24 @@ app.use(function(req, res, next) {
     next();
 });
 
+var diskStorage = multer.diskStorage({
+    destination: function(req, file, callback) {
+        callback(null, __dirname + "/uploads");
+    },
+    filename: function(req, file, callback) {
+        uidSafe(24).then(function(uid) {
+            callback(null, uid + path.extname(file.originalname));
+        });
+    }
+});
+
+var uploader = multer({
+    storage: diskStorage,
+    limits: {
+        fileSize: 2097152
+    }
+});
+
 if (process.env.NODE_ENV != "production") {
     app.use(
         "/bundle.js",
@@ -47,6 +70,30 @@ if (process.env.NODE_ENV != "production") {
 } else {
     app.use("/bundle.js", (req, res) => res.sendFile(`${__dirname}/bundle.js`));
 }
+
+app.post("/upload", uploader.single("file"), s3.upload, function(req, res) {
+    db
+        .uploadImage(req.session.userId, config.s3Url + req.file.filename)
+        .then(function(result) {
+            res.json(result.rows[0].image_url);
+        })
+        .catch(function(err) {
+            console.log(err);
+            res.sendStatus(500);
+        });
+});
+
+app.get("/user", function(req, res) {
+    db
+        .loggedUser(req.session.userId)
+        .then(function(data) {
+            // console.log(data.rows[0]);
+            res.json(data.rows[0]);
+        })
+        .catch(function(err) {
+            console.log(err);
+        });
+});
 
 app.post("/register", function(req, res) {
     db
@@ -60,7 +107,7 @@ app.post("/register", function(req, res) {
             );
         })
         .then(function(userId) {
-            console.log(userId);
+            // console.log(userId);
             req.session.userId = userId.rows[0].id;
         })
         .then(function() {
@@ -77,27 +124,40 @@ app.post("/register", function(req, res) {
 });
 
 app.post("/login", function(req, res) {
+    let userId;
+    let first;
+    let last;
+
     db
         .getUserByEmail(req.body.email)
         .then(function(data) {
+            userId = data.rows[0].id;
+            first = data.rows[0].first;
+            last = data.rows[0].last;
             return db.checkPassword(req.body.password, data.rows[0].password);
         })
         .then(function(data) {
             if (data == false) {
                 throw new Error();
-                res.json({
-                    error: true
-                });
             } else {
                 req.session.userId = userId;
                 req.session.first = first;
                 req.session.last = last;
-                req.session.email = email;
+                res.json({
+                    success: true
+                });
             }
+        })
+        .catch(error => {
+            console.log(error);
+            res.json({
+                success: false
+            });
         });
-    res.json({
-        success: true
-    });
+});
+app.get("/logout", function(req, res) {
+    req.session.userId = null;
+    res.redirect("/welcome");
 });
 
 app.get("/welcome", function(req, res) {

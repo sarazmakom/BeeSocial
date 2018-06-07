@@ -16,7 +16,7 @@ let component;
 if (location.pathname == "/welcome") {
     component = <Welcome />;
 } else {
-    component = <Logo />;
+    component = <App />;
 }
 
 ReactDOM.render(component, document.querySelector("main"));

@@ -1,12 +1,15 @@
 import React from "react";
 import axios from "axios";
 import Logo from "./logo";
+import ProfilePic from "./profile";
+import Uploader from "./uploader";
 
-class App extends React.Component {
+export default class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {};
         this.showUploader = this.showUploader.bind(this);
+        this.hideUploader = this.hideUploader.bind(this);
         this.setImage = this.setImage.bind(this);
     }
     componentDidMount() {
@@ -14,8 +17,9 @@ class App extends React.Component {
             this.setState({
                 first: data.first,
                 last: data.last,
-                profilePic: data.profilePic,
-                id: data.id
+                profilePic: data.image_url,
+                id: data.id,
+                bio: data.bio
             });
         });
     }
@@ -24,15 +28,21 @@ class App extends React.Component {
             uploaderIsVisible: true
         });
     }
+    hideUploader() {
+        this.setState({
+            uploaderIsVisible: false
+        });
+    }
     setImage(imgUrl) {
         this.setState({
             profilePic: imgUrl,
             uploaderIsVisible: false
         });
+        // alert(9);
     }
     render() {
         if (!this.state.id) {
-            return <div> Loading...</div>;
+            return null;
         }
         return (
             <div id="app">
@@ -42,7 +52,10 @@ class App extends React.Component {
                     onClick={this.showUploader}
                 />
                 {this.state.uploaderIsVisible && (
-                    <Uploader setImage={this.setImage} />
+                    <Uploader
+                        setImage={this.setImage}
+                        onClick={this.hideUploader}
+                    />
                 )}
             </div>
         );

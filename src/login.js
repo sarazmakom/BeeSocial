@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import axios from "./axios";
 import { Link } from "react-router-dom";
 
-class Login extends Component {
+export default class Login extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -23,6 +23,8 @@ class Login extends Component {
         );
     }
     onSubmit(e) {
+        console.log(this.state);
+
         e.preventDefault();
         axios.post("/login", this.state).then(resp => {
             if (resp.data.success) {
@@ -39,20 +41,19 @@ class Login extends Component {
             <div id="login">
                 <h2>Please login</h2>
 
-                <form>
-                    <input
-                        onChange={this.onChange}
-                        name="email"
-                        type="email"
-                        placeholder="email"
-                    />
-                    <input
-                        name="password"
-                        type="password"
-                        placeholder="password"
-                    />
-                    <button onSubmit={this.onSubmit}>Login</button>
-                </form>
+                <input
+                    onChange={this.onChange}
+                    name="email"
+                    type="email"
+                    placeholder="email"
+                />
+                <input
+                    name="password"
+                    type="password"
+                    placeholder="password"
+                    onChange={this.onChange}
+                />
+                <button onClick={this.onSubmit}>Login</button>
 
                 {this.state.error && (
                     <div className="err">
@@ -64,5 +65,4 @@ class Login extends Component {
         );
     }
 }
-
-export default Login;
+// export default Login;
