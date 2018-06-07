@@ -1,0 +1,50 @@
+* {
+    /* background: rgb(83, 125, 163); */
+    font-family: monospace;
+}
+
+h1 {
+    text-align: center;
+}
+
+#register {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+#welcome {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+input {
+    margin: 10px;
+    border: black solid thin;
+    /* font-size: 20px; */
+    width: 70%;
+    height: 70%;
+}
+
+button {
+    margin: 10px;
+
+    width: 70%;
+    height: 70%;
+}
+
+#welcome {
+    /* background-color: blue; */
+}
+
+.err {
+    font-size: 30px;
+}
+
+.logo {
+    border-radius: 50%;
+}

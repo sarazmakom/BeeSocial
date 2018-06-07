@@ -1,13 +1,22 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React from "react";
+import ReactDOM from "react-dom";
+import Axios from "axios";
+import Welcome from "./welcome";
+import Logo from "./logo";
+import Register from "./register";
+import App from "./app";
 
-ReactDOM.render(
-    <HelloWorld />,
-    document.querySelector('main')
-);
+// if (location.pathname == '/welcome') {
+//     console.log('logged OUT');
+// } else {
+//     console.log('logged IN');
+// }
 
-function HelloWorld() {
-    return (
-        <div>Hello, World!</div>
-    );
+let component;
+if (location.pathname == "/welcome") {
+    component = <Welcome />;
+} else {
+    component = <Logo />;
 }
+
+ReactDOM.render(component, document.querySelector("main"));
