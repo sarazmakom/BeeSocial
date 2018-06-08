@@ -59,6 +59,16 @@ exports.uploadImage = function(id, image_url) {
     );
 };
 
+exports.bioUpload = function(id, bio) {
+    return db.query(
+        `UPDATE users
+        SET bio = $2
+        WHERE id = $1
+        RETURNING bio`,
+        [id || null, bio]
+    );
+};
+
 exports.hashPass = function(plainTextPassword) {
     return new Promise(function(resolve, reject) {
         bcrypt.genSalt(function(err, salt) {

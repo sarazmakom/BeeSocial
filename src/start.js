@@ -6,12 +6,6 @@ import Logo from "./logo";
 import Register from "./register";
 import App from "./app";
 
-// if (location.pathname == '/welcome') {
-//     console.log('logged OUT');
-// } else {
-//     console.log('logged IN');
-// }
-
 let component;
 if (location.pathname == "/welcome") {
     component = <Welcome />;

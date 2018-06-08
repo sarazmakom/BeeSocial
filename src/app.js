@@ -1,8 +1,11 @@
 import React from "react";
 import axios from "axios";
 import Logo from "./logo";
-import ProfilePic from "./profile";
+import ProfilePic from "./propic";
 import Uploader from "./uploader";
+import { BrowserRouter, Link, Route } from "react-router-dom";
+import Profile from "./profile";
+import BioUpload from "./bioupload";
 
 export default class App extends React.Component {
     constructor(props) {
@@ -11,9 +14,12 @@ export default class App extends React.Component {
         this.showUploader = this.showUploader.bind(this);
         this.hideUploader = this.hideUploader.bind(this);
         this.setImage = this.setImage.bind(this);
+        this.setBio = this.setBio.bind(this);
+        this.showBioUploader = this.showBioUploader.bind(this);
     }
     componentDidMount() {
         axios.get("/user").then(({ data }) => {
+            console.log(data);
             this.setState({
                 first: data.first,
                 last: data.last,
@@ -24,6 +30,7 @@ export default class App extends React.Component {
         });
     }
     showUploader() {
+        console.log("hello");
         this.setState({
             uploaderIsVisible: true
         });
@@ -38,7 +45,23 @@ export default class App extends React.Component {
             profilePic: imgUrl,
             uploaderIsVisible: false
         });
-        // alert(9);
+    }
+    setBio(newBio) {
+        this.setState(
+            {
+                bio: newBio,
+                bioUploaderIsVisible: false
+            },
+            () => console.log("bio set", this.state)
+        );
+    }
+    showBioUploader() {
+        this.setState(
+            {
+                bioUploaderIsVisible: true
+            },
+            () => console.log("show", this.state)
+        );
     }
     render() {
         if (!this.state.id) {
@@ -51,6 +74,30 @@ export default class App extends React.Component {
                     url={this.state.profilePic}
                     onClick={this.showUploader}
                 />
+
+                <BrowserRouter>
+                    <div>
+                        <Route
+                            path="/"
+                            render={() => (
+                                <Profile
+                                    id={this.state.id}
+                                    first={this.state.first}
+                                    last={this.state.last}
+                                    profilePic={this.state.profilePic}
+                                    bio={this.state.bio}
+                                    setBio={this.setBio}
+                                    showBioUploader={this.showBioUploader}
+                                    showUploader={this.showUploader}
+                                    bioUploaderIsVisible={
+                                        this.state.bioUploaderIsVisible
+                                    }
+                                />
+                            )}
+                        />
+                    </div>
+                </BrowserRouter>
+
                 {this.state.uploaderIsVisible && (
                     <Uploader
                         setImage={this.setImage}
@@ -61,11 +108,3 @@ export default class App extends React.Component {
         );
     }
 }
-
-// in the index.js - app get profile we can check if the profilepic is there or in the profile pic componenet
-// if props.url is undefined use default pic
-//uploaderIsVisible - true the parent app need to pass a function to make the uploaderIsVisible show
-
-// <img src={props.url} onClick= {props.onClick}
-//upload button - label with hidden input
-//s3 updating th erow in the database ajax response with th uploadurl image

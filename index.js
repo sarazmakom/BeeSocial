@@ -83,11 +83,22 @@ app.post("/upload", uploader.single("file"), s3.upload, function(req, res) {
         });
 });
 
+app.post("/bioupload", function(req, res) {
+    console.log(req.body);
+    db
+        .bioUpload(req.session.userId, req.body.newBio)
+        .then(function(data) {
+            res.json(data.rows[0].bio);
+        })
+        .catch(function(err) {
+            console.log(err);
+        });
+});
+
 app.get("/user", function(req, res) {
     db
         .loggedUser(req.session.userId)
         .then(function(data) {
-            // console.log(data.rows[0]);
             res.json(data.rows[0]);
         })
         .catch(function(err) {
@@ -107,7 +118,6 @@ app.post("/register", function(req, res) {
             );
         })
         .then(function(userId) {
-            // console.log(userId);
             req.session.userId = userId.rows[0].id;
         })
         .then(function() {

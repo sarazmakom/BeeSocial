@@ -34,7 +34,7 @@ export default class Register extends React.Component {
     render() {
         return (
             <div id="register">
-                <h2>Fill out this form to register:</h2>
+                <h2>Please register:</h2>
 
                 {this.state.error && (
                     <div className="err">
