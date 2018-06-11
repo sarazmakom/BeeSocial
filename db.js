@@ -39,6 +39,14 @@ exports.getUserByEmail = function(email) {
     );
 };
 
+exports.getUserById = function(id) {
+    return db.query(
+        `SELECT * FROM users WHERE id = $1
+        `,
+        [id]
+    );
+};
+
 exports.loggedUser = function(id) {
     return db.query(
         `

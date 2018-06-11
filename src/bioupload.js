@@ -5,7 +5,6 @@ export default class BioUpload extends React.Component {
     constructor(props) {
         super(props);
         this.state = {};
-
         this.uploadBio = this.uploadBio.bind(this);
         this.handleInput = this.handleInput.bind(this);
     }

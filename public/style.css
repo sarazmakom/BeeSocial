@@ -54,6 +54,11 @@ button {
     width: 62%;
 }
 
+textarea {
+    font-size: 20px;
+    width: 60%;
+}
+
 #welcome {
     /* background-color: blue; */
 }
@@ -82,21 +87,13 @@ button {
     left: 0;
 }
 
-.profilepic {
-    text-align: center;
-    display: block;
-    position: relative;
-    width: 50%;
-    height: 50%;
-}
-
 .x {
     top: 10px;
     right: 10px;
 }
 
 #app {
-    position: absolute;
+    position: relative;
 }
 
 #biouploader {
@@ -105,4 +102,21 @@ button {
     justify-content: center;
     align-items: center;
     text-align: center;
+}
+
+.big {
+    position: relative;
+    width: 50%;
+}
+.small {
+    width: 10%;
+}
+.small img {
+    position: relative;
+    width: 100%;
+    top: 0;
+    right: 0;
+}
+.big img {
+    width: 100%;
 }

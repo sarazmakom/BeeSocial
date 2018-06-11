@@ -134,10 +134,7 @@ app.post("/register", function(req, res) {
 });
 
 app.post("/login", function(req, res) {
-    let userId;
-    let first;
-    let last;
-
+    let userId, first, last;
     db
         .getUserByEmail(req.body.email)
         .then(function(data) {
@@ -165,6 +162,31 @@ app.post("/login", function(req, res) {
             });
         });
 });
+
+app.get("/users/:id/info", function(req, res) {
+    let userId, first, last, profilePic, bio;
+    if (req.params.id == req.session.userId) {
+        return res.json({
+            redirectToProfile: true
+        });
+    }
+    db.getUserById(req.params.id).then(({ rows }) => {
+        console.log("rows are here", rows);
+        userId = rows[0].id;
+        first = rows[0].first;
+        last = rows[0].last;
+        profilePic = rows[0].image_url;
+        bio = rows[0].bio;
+        res.json({
+            userId,
+            first,
+            last,
+            profilePic,
+            bio
+        });
+    });
+});
+
 app.get("/logout", function(req, res) {
     req.session.userId = null;
     res.redirect("/welcome");

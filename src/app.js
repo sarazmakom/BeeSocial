@@ -6,6 +6,7 @@ import Uploader from "./uploader";
 import { BrowserRouter, Link, Route } from "react-router-dom";
 import Profile from "./profile";
 import BioUpload from "./bioupload";
+import OtherPersonProfile from "./other";
 
 export default class App extends React.Component {
     constructor(props) {
@@ -19,7 +20,6 @@ export default class App extends React.Component {
     }
     componentDidMount() {
         axios.get("/user").then(({ data }) => {
-            console.log(data);
             this.setState({
                 first: data.first,
                 last: data.last,
@@ -30,7 +30,6 @@ export default class App extends React.Component {
         });
     }
     showUploader() {
-        console.log("hello");
         this.setState({
             uploaderIsVisible: true
         });
@@ -60,7 +59,7 @@ export default class App extends React.Component {
             {
                 bioUploaderIsVisible: true
             },
-            () => console.log("show", this.state)
+            () => console.log("show biouploader's this.state", this.state)
         );
     }
     render() {
@@ -68,16 +67,18 @@ export default class App extends React.Component {
             return null;
         }
         return (
-            <div id="app">
-                <Logo />
-                <ProfilePic
-                    url={this.state.profilePic}
-                    onClick={this.showUploader}
-                />
-
-                <BrowserRouter>
+            <BrowserRouter>
+                <div id="app">
+                    <Logo />
+                    <div className="small">
+                        <img
+                            src={this.state.profilePic}
+                            onClick={this.showUploader}
+                        />
+                    </div>
                     <div>
                         <Route
+                            exact
                             path="/"
                             render={() => (
                                 <Profile
@@ -96,15 +97,20 @@ export default class App extends React.Component {
                             )}
                         />
                     </div>
-                </BrowserRouter>
-
-                {this.state.uploaderIsVisible && (
-                    <Uploader
-                        setImage={this.setImage}
-                        onClick={this.hideUploader}
-                    />
-                )}
-            </div>
+                    <div>
+                        <Route
+                            path="/users/:id"
+                            component={OtherPersonProfile}
+                        />
+                    </div>
+                    {this.state.uploaderIsVisible && (
+                        <Uploader
+                            setImage={this.setImage}
+                            onClick={this.hideUploader}
+                        />
+                    )}
+                </div>
+            </BrowserRouter>
         );
     }
 }
