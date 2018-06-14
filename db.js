@@ -23,14 +23,6 @@ exports.getUsers = function(first, last, email, password, bio, image_url) {
     );
 };
 
-exports.insertPass = function(hashPass) {
-    return db.query(
-        `INSERT INTO users password VALUES $1
-        `,
-        [hashPass]
-    );
-};
-
 exports.getUserByEmail = function(email) {
     return db.query(
         `SELECT * FROM users WHERE email = $1
@@ -74,6 +66,44 @@ exports.bioUpload = function(id, bio) {
         WHERE id = $1
         RETURNING bio`,
         [id || null, bio]
+    );
+};
+
+exports.requestFriendship = function(sender_id, recipient_id) {
+    return db.query(
+        `INSERT INTO friendships(sender_id, recipient_id, status)
+        VALUES ($1, $2, 1) RETURNING sender_id, recipient_id, status`,
+        [sender_id, recipient_id]
+    );
+};
+
+exports.acceptRequest = function(sender_id, recipient_id) {
+    return db.query(
+        `UPDATE friendships
+        SET status = 2
+        WHERE (sender_id = $1 AND recipient_id = $2)
+        OR (sender_id = $2 AND recipient_id = $1)`,
+        [sender_id, recipient_id]
+    );
+};
+
+exports.deleteRequest = function(sender_id, recipient_id) {
+    return db.query(
+        `DELETE FROM friendships
+        WHERE (sender_id = $1 AND recipient_id = $2)
+        OR (sender_id = $2 AND recipient_id = $1)`,
+        [sender_id, recipient_id]
+    );
+};
+
+exports.friendStatus = function friendStatus(sender_id, recipient_id) {
+    return db.query(
+        `SELECT status, recipient_id, sender_id FROM friendships
+        WHERE (recipient_id = $1 AND sender_id = $2)
+        OR (sender_id = $1 AND recipient_id = $2)
+        ORDER BY created_at DESC LIMIT 1
+        `,
+        [sender_id, recipient_id]
     );
 };
 

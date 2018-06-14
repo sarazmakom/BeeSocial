@@ -4,15 +4,21 @@
 }
 
 h1 {
+    font-size: 40px;
     text-align: center;
+    text-shadow: 5px 5px 10px #000;
 }
 
 #register {
+    -webkit-box-shadow: 0px 33px 117px -33px rgba(0, 0, 0, 0.68);
+    -moz-box-shadow: 0px 33px 117px -33px rgba(0, 0, 0, 0.68);
+    box-shadow: 0px 33px 117px -33px rgba(0, 0, 0, 0.68);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
+    margin: 50px;
 }
 #login {
     display: flex;
@@ -27,6 +33,10 @@ h1 {
     justify-content: center;
     align-items: center;
     text-align: center;
+    width: 100vw;
+    height: 100vh;
+    /* width: 100%;
+    height: 100%; */
 }
 input {
     margin-top: 10px;
@@ -59,8 +69,8 @@ textarea {
     width: 60%;
 }
 
-#welcome {
-    /* background-color: blue; */
+.welcome {
+    position: absolute;
 }
 #uploader {
     display: flex;
@@ -70,8 +80,17 @@ textarea {
     text-align: center;
     width: 100%;
     height: 100%;
+    /* background-color: blue; */
+}
 
-    background-color: blue;
+#opp {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 90vw;
+    height: 90vh;
 }
 
 .err {
@@ -79,12 +98,12 @@ textarea {
 }
 
 .logo {
-    border-radius: 50%;
+    /* border-radius: 50%; */
     width: 20%;
     height: 20%;
     position: relative;
-    top: 0;
-    left: 0;
+    top: 10px;
+    right: 0;
 }
 
 .x {
@@ -104,19 +123,30 @@ textarea {
     text-align: center;
 }
 
-.big {
-    position: relative;
-    width: 50%;
-}
-.small {
-    width: 10%;
-}
 .small img {
-    position: relative;
-    width: 100%;
+    position: absolute;
+    width: 10%;
     top: 0;
     right: 0;
+    border-radius: 50%;
 }
 .big img {
+    position: relative;
+    width: 50%;
+
+    /* width: 100px;
+    height: 100px; */
+}
+
+.header {
+    position: relative;
     width: 100%;
+}
+
+.align {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
 }

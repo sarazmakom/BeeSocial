@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "axios";
 import { BrowserRouter, Link, Route } from "react-router-dom";
+import FriendButton from "./friendbutton";
 
 export default class OtherPersonProfile extends React.Component {
     constructor(props) {
@@ -8,11 +9,11 @@ export default class OtherPersonProfile extends React.Component {
         this.state = {};
     }
     componentDidMount() {
-        console.log("this.props", this.props);
+        // console.log("this.props", this.props);
         const id = this.props.match.params.id;
-        console.log("id", id);
+        // console.log("id", id);
         axios.get(`/users/${id}/info`).then(({ data }) => {
-            console.log("componentDidMount data", data);
+            // console.log("componentDidMount data", data);
             if (data.redirectToProfile) {
                 return this.props.history.push("/");
             }
@@ -39,6 +40,7 @@ export default class OtherPersonProfile extends React.Component {
                 </h1>
                 <img src={this.state.profilePic} />
                 <h2>{this.state.bio}</h2>
+                <FriendButton otherUserId={this.props.match.params.id} />
             </div>
         );
     }

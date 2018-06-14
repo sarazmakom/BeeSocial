@@ -69,12 +69,14 @@ export default class App extends React.Component {
         return (
             <BrowserRouter>
                 <div id="app">
-                    <Logo />
-                    <div className="small">
-                        <img
-                            src={this.state.profilePic}
-                            onClick={this.showUploader}
-                        />
+                    <div className="header">
+                        <Logo />
+                        <div className="small">
+                            <img
+                                src={this.state.profilePic}
+                                onClick={this.showUploader}
+                            />
+                        </div>
                     </div>
                     <div>
                         <Route

@@ -5,6 +5,6 @@ CREATE TABLE friendships (
     sender_id INTEGER NOT NULL,
     recipient_id INTEGER NOT NULL,
     status INTEGER,
-    created_at TIMESTAMP DEFAULT  CURRENT_TIMESTAMP,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP
 )

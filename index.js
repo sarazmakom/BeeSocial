@@ -29,7 +29,7 @@ app.use(
 
 app.use(
     cookieSession({
-        secret: `Deepest of all the secrets`,
+        secret: `Victoria's secret`,
         maxAge: 1000 * 60 * 60 * 24 * 30
     })
 );
@@ -37,7 +37,6 @@ app.use(
 app.use(csurf());
 
 app.use(function(req, res, next) {
-    // console.log(req.csrfToken);
     res.cookie("mytoken", req.csrfToken());
     next();
 });
@@ -171,7 +170,7 @@ app.get("/users/:id/info", function(req, res) {
         });
     }
     db.getUserById(req.params.id).then(({ rows }) => {
-        console.log("rows are here", rows);
+        // console.log("rows are here", rows);
         userId = rows[0].id;
         first = rows[0].first;
         last = rows[0].last;
@@ -185,6 +184,46 @@ app.get("/users/:id/info", function(req, res) {
             bio
         });
     });
+});
+
+app.get("/friendstatus/:id", function(req, res) {
+    db.friendStatus(req.session.userId, req.params.id).then(data => {
+        res.json(data.rows[0]);
+        // console.log("friendstatus", data);
+    });
+});
+
+app.post("/requestFriendship", function(req, res) {
+    db
+        .requestFriendship(req.session.userId, req.body.recipient)
+        .then(data => {
+            res.json(data.rows[0]);
+        })
+        .catch(function(error) {
+            console.log(error);
+        });
+});
+
+app.post("/acceptRequest", function(req, res) {
+    db
+        .acceptRequest(req.body.recipient, req.body.sender)
+        .then(data => {
+            res.json(data.rows[0]);
+        })
+        .catch(function(error) {
+            console.log(error);
+        });
+});
+
+app.post("/deleteRequest", function(req, res) {
+    db
+        .deleteRequest(req.body.sender, req.body.recipient)
+        .then(() => {
+            res.json({ deleted: true });
+        })
+        .catch(function(error) {
+            console.log(error);
+        });
 });
 
 app.get("/logout", function(req, res) {
@@ -209,5 +248,5 @@ app.get("*", function(req, res) {
 });
 
 app.listen(8080, function() {
-    console.log("I'm listening.");
+    console.log("I'm listening on 8080...");
 });

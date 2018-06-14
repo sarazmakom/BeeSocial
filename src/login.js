@@ -39,8 +39,6 @@ export default class Login extends Component {
     render() {
         return (
             <div id="login">
-                <h2>Please login</h2>
-
                 <input
                     onChange={this.onChange}
                     name="email"
@@ -60,7 +58,9 @@ export default class Login extends Component {
                         Oops, something went wrong! Please try again.
                     </div>
                 )}
-                <Link to="/">Register</Link>
+                <p>
+                    or <Link to="/">Sign up</Link>
+                </p>
             </div>
         );
     }

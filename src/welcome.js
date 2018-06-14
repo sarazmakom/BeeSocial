@@ -2,21 +2,24 @@ import React from "react";
 import Register from "./register";
 import Login from "./login";
 import { HashRouter, Route, Link } from "react-router-dom";
-import App from "./app";
+import Logo from "./logo";
 
 export default Welcome;
 
 function Welcome() {
     return (
-        <div id="welcome">
-            <App />
-            <h1>Welcome to this great social network</h1>
-            <HashRouter>
-                <div>
-                    <Route exact path="/" component={Register} />
-                    <Route path="/login" component={Login} />
-                </div>
-            </HashRouter>
+        <div className="welcome">
+            <Logo />
+            <div id="welcome">
+                <h1>Welcome to this great social network</h1>
+                <h2>Be social, contact your friends.</h2>
+                <HashRouter>
+                    <div>
+                        <Route exact path="/" component={Register} />
+                        <Route path="/login" component={Login} />
+                    </div>
+                </HashRouter>
+            </div>
         </div>
     );
 }
