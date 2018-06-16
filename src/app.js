@@ -7,6 +7,9 @@ import { BrowserRouter, Link, Route } from "react-router-dom";
 import Profile from "./profile";
 import BioUpload from "./bioupload";
 import OtherPersonProfile from "./other";
+import Friends from "./friends";
+// import { connect } from "react-redux";
+// import { getUserInfo } from "./actions";
 
 export default class App extends React.Component {
     constructor(props) {
@@ -29,6 +32,7 @@ export default class App extends React.Component {
             });
         });
     }
+
     showUploader() {
         this.setState({
             uploaderIsVisible: true
@@ -71,6 +75,7 @@ export default class App extends React.Component {
                 <div id="app">
                     <div className="header">
                         <Logo />
+                        <Link to="/friends">Friends</Link>
                         <div className="small">
                             <img
                                 src={this.state.profilePic}
@@ -99,6 +104,8 @@ export default class App extends React.Component {
                             )}
                         />
                     </div>
+                    <Route path="/friends" component={Friends} />
+
                     <div>
                         <Route
                             path="/users/:id"
@@ -116,3 +123,5 @@ export default class App extends React.Component {
         );
     }
 }
+
+// export default connect(getStateFromRedux)(App);

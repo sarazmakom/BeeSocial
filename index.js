@@ -1,5 +1,7 @@
 const express = require("express");
 const app = express();
+const server = require("http").Server(app);
+const io = require("socket.io")(server, { origins: "localhost:8080" });
 const compression = require("compression");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
@@ -27,12 +29,16 @@ app.use(
     })
 );
 
-app.use(
-    cookieSession({
-        secret: `Victoria's secret`,
-        maxAge: 1000 * 60 * 60 * 24 * 30
-    })
-);
+const cookieSessionMiddleware = cookieSession({
+    secret: `Victoria's secret`,
+    maxAge: 1000 * 60 * 60 * 24 * 30
+});
+
+app.use(cookieSessionMiddleware);
+
+io.use(function(socket, next) {
+    cookieSessionMiddleware(socket.request, socket.request.res, next);
+});
 
 app.use(csurf());
 
@@ -226,6 +232,18 @@ app.post("/deleteRequest", function(req, res) {
         });
 });
 
+app.get("/getfriendslist", function(req, res) {
+    db
+        .getPendingAndFriends(req.session.userId)
+        .then(data => {
+            console.log("data from index", data.rows);
+            res.json(data.rows);
+        })
+        .catch(function(error) {
+            console.log(error);
+        });
+});
+
 app.get("/logout", function(req, res) {
     req.session.userId = null;
     res.redirect("/welcome");
@@ -247,6 +265,25 @@ app.get("*", function(req, res) {
     }
 });
 
-app.listen(8080, function() {
+server.listen(8080, function() {
     console.log("I'm listening on 8080...");
 });
+//
+// let onlineUsers = {};
+//
+// io.on("connection", function(socket) {
+//     if (!socket.request.session || !socket.request.session.userId) {
+//         return socket.disconnect(true);
+//     }
+//     const userId = socket.request.session.userId;
+//
+//     onlineUsers[socket.id] = userId;
+//
+// db.getUsersbyIds(Object.values(onlineUsers)).then(({ rows }) => {
+//     socket.emit("onlineUsers", rows);
+// });
+//
+//     socket.on("disconnect", function() {
+//         delete onlineUsers[socketId];
+//     });
+// });

@@ -96,6 +96,19 @@ exports.deleteRequest = function(sender_id, recipient_id) {
     );
 };
 
+exports.getPendingAndFriends = function(id) {
+    console.log("running db");
+    return db.query(
+        `SELECT users.id, first, last, image_url, status
+        FROM friendships
+        JOIN users
+        ON (status = 1 AND recipient_id = $1 AND sender_id = users.id)
+        OR (status = 2 AND recipient_id = $1 AND sender_id = users.id)
+        OR (status = 2 AND sender_id = $1 AND recipient_id = users.id)`,
+        [id]
+    );
+};
+
 exports.friendStatus = function friendStatus(sender_id, recipient_id) {
     return db.query(
         `SELECT status, recipient_id, sender_id FROM friendships

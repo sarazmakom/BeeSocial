@@ -73,7 +73,6 @@ export default class FriendButton extends React.Component {
                         );
                     });
             } else {
-                console.log("running");
                 axios
                     .post("/acceptRequest", {
                         recipient: this.state.recipient,
