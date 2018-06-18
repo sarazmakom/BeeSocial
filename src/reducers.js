@@ -43,5 +43,27 @@ export default function(state = {}, action) {
             friendslist: friendlistCopy
         });
     }
+
+    if (action.type == "ONLINE_USERS") {
+        state = Object.assign({}, state, {
+            onlineUsers: action.users
+        });
+    }
+    if (action.type == "USER_JOINED") {
+        if (state.onlineUsers) {
+            state = Object.assign({}, state, {
+                onlineUsers: state.onlineUsers.concat(action.user)
+            });
+        }
+    }
+    if (action.type == "USER_LEFT") {
+        const newUsers = state.onlineUsers.filter(user => {
+            return user.id != action.userId;
+        });
+        state = Object.assign({}, state, {
+            onlineUsers: newUsers
+        });
+    }
+
     return state;
 }

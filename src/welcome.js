@@ -11,7 +11,7 @@ function Welcome() {
         <div className="welcome">
             <Logo />
             <div id="welcome">
-                <h1>Welcome to this great social network</h1>
+                <h1> Bee nice</h1>
                 <h2>Be social, contact your friends.</h2>
                 <HashRouter>
                     <div>

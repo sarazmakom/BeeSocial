@@ -268,22 +268,24 @@ app.get("*", function(req, res) {
 server.listen(8080, function() {
     console.log("I'm listening on 8080...");
 });
-//
-// let onlineUsers = {};
-//
-// io.on("connection", function(socket) {
-//     if (!socket.request.session || !socket.request.session.userId) {
-//         return socket.disconnect(true);
-//     }
-//     const userId = socket.request.session.userId;
-//
-//     onlineUsers[socket.id] = userId;
-//
-// db.getUsersbyIds(Object.values(onlineUsers)).then(({ rows }) => {
-//     socket.emit("onlineUsers", rows);
-// });
-//
-//     socket.on("disconnect", function() {
-//         delete onlineUsers[socketId];
-//     });
-// });
+
+let onlineUsers = {};
+
+io.on("connection", function(socket) {
+    console.log(`socket with the id ${socket.id} is now connected`);
+
+    if (!socket.request.session || !socket.request.session.userId) {
+        return socket.disconnect(true);
+    }
+    const userId = socket.request.session.userId;
+    const socketId = socket.id;
+    onlineUsers[socket.id] = userId;
+
+    db.getUsersbyIds(Object.values(onlineUsers)).then(({ rows }) => {
+        socket.emit("onlineUsers", rows);
+    });
+
+    socket.on("disconnect", function() {
+        delete onlineUsers[socketId];
+    });
+});

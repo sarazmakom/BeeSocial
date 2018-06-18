@@ -8,6 +8,7 @@ import Profile from "./profile";
 import BioUpload from "./bioupload";
 import OtherPersonProfile from "./other";
 import Friends from "./friends";
+import Online from "./online";
 // import { connect } from "react-redux";
 // import { getUserInfo } from "./actions";
 
@@ -75,13 +76,18 @@ export default class App extends React.Component {
                 <div id="app">
                     <div className="header">
                         <Logo />
-                        <Link to="/friends">Friends</Link>
+
                         <div className="small">
                             <img
                                 src={this.state.profilePic}
                                 onClick={this.showUploader}
                             />
                         </div>
+                    </div>
+                    <div className="links">
+                        <Link to="/friends">Friends</Link>
+                        <br />
+                        <Link to="/online">Online users</Link>
                     </div>
                     <div>
                         <Route
@@ -104,7 +110,8 @@ export default class App extends React.Component {
                             )}
                         />
                     </div>
-                    <Route path="/friends" component={Friends} />
+                    <Route exact path="/friends" component={Friends} />
+                    <Route exact path="/online" component={Online} />
 
                     <div>
                         <Route
@@ -123,5 +130,3 @@ export default class App extends React.Component {
         );
     }
 }
-
-// export default connect(getStateFromRedux)(App);

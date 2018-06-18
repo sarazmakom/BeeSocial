@@ -109,7 +109,7 @@ exports.getPendingAndFriends = function(id) {
     );
 };
 
-exports.friendStatus = function friendStatus(sender_id, recipient_id) {
+exports.friendStatus = function(sender_id, recipient_id) {
     return db.query(
         `SELECT status, recipient_id, sender_id FROM friendships
         WHERE (recipient_id = $1 AND sender_id = $2)
@@ -117,6 +117,16 @@ exports.friendStatus = function friendStatus(sender_id, recipient_id) {
         ORDER BY created_at DESC LIMIT 1
         `,
         [sender_id, recipient_id]
+    );
+};
+
+exports.getUsersbyIds = function(arrayOfIds) {
+    return db.query(
+        `
+        SELECT id, first, last, image_url
+        FROM users
+        WHERE id = ANY($1)`,
+        [arrayOfIds]
     );
 };
 

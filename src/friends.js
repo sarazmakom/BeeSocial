@@ -20,18 +20,18 @@ class Friends extends React.Component {
         return (
             <div>
                 <div className="pendingList">
+                    <h2>Pending friends:</h2>
                     {this.props.pending &&
                         this.props.pending.map(pending => {
                             return (
-                                <div className="pendingPhoto" key={pending.id}>
+                                <div className="pendingImg" key={pending.id}>
                                     <img
-                                        src={
-                                            pending.image_url ||
-                                            "/assets/user.png"
-                                        }
+                                        src={pending.image_url || "user.png"}
                                     />
-                                    {pending.first}
-                                    {pending.last}
+                                    <div>
+                                        {pending.first}
+                                        {pending.last}
+                                    </div>
 
                                     <button
                                         onClick={() =>
@@ -50,18 +50,19 @@ class Friends extends React.Component {
                         })}
                 </div>
                 <div className="friendsList">
+                    <h2>Friends:</h2>
+
                     {this.props.friends &&
                         this.props.friends.map(friend => {
                             return (
                                 <div key={friend.id}>
                                     <img
-                                        className="friendPhoto"
-                                        src={
-                                            friend.image_url ||
-                                            "/assets/user.png"
-                                        }
+                                        className="friendImg"
+                                        src={friend.image_url || "user.png"}
                                     />
-                                    {friend.first} {friend.last}
+                                    <div>
+                                        {friend.first} {friend.last}
+                                    </div>
                                     <button
                                         onClick={() =>
                                             this.props.dispatch(

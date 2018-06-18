@@ -25,15 +25,14 @@ export default class Uploader extends React.Component {
                 <div className="x" onClick={this.props.onClick}>
                     X
                 </div>
-                <div>
-                    <input
-                        type="file"
-                        name="file"
-                        id="file"
-                        onChange={this.setFile}
-                    />
-                    <button onClick={this.upload}>Upload</button>
-                </div>
+
+                <input
+                    type="file"
+                    name="file"
+                    id="file"
+                    onChange={this.setFile}
+                />
+                <button onClick={this.upload}>Upload</button>
             </div>
         );
     }

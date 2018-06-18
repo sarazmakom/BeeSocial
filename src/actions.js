@@ -50,27 +50,27 @@ export function endFriendship(senderId, recipientId) {
             };
         });
 }
-//
-// export function onlineUsers(user) {
-//     return {
-//         type: "ONLINE_USERS",
-//         user
-//     };
-// }
-//
-// export function userLeft(user) {
-//     return {
-//         type: "USER_LEFT",
-//         user
-//     };
-// }
-//
-// export function userJoined(user) {
-//     return {
-//         type: "USER_JOINED",
-//         user
-//     };
-// }
+
+export function onlineUsers(users) {
+    return {
+        type: "ONLINE_USERS",
+        users
+    };
+}
+
+export function userLeft(userId) {
+    return {
+        type: "USER_LEFT",
+        userId
+    };
+}
+
+export function userJoined(newUser) {
+    return {
+        type: "USER_JOINED",
+        newUser
+    };
+}
 
 // in actions
 // if (action.type == "USER_JOINED"){
