@@ -11,11 +11,11 @@ class Online extends React.Component {
             console.log("user", user);
             return (
                 <div className="online" key={user.id}>
-                    <Link to={`/users/${user.id}`}>
-                        <img src={user.image_url} />
-                        <p>
+                    <Link to={`/users/${user.id}`} className="link-style">
+                        <img className="onlineImage" src={user.image_url} />
+                        <h3>
                             {user.first} {user.last}
-                        </p>
+                        </h3>
                     </Link>
                 </div>
             );
@@ -27,7 +27,7 @@ class Online extends React.Component {
         }
         return (
             <div className="online">
-                <h2>Online friends:</h2>
+                <h2>Online users:</h2>
 
                 <div>{this.onlineUsers()}</div>
             </div>

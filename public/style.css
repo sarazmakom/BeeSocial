@@ -1,12 +1,19 @@
 * {
     /* background: rgb(83, 125, 163); */
-    font-family: "Noto Serif", serif;
+    /* font-family: "Noto Serif", serif; */
+    font-family: "Song Myung", serif;
 }
 
 h1 {
-    font-size: 40px;
+    font-family: "Ribeye", cursive;
+    font-size: 50px;
     text-align: center;
     text-shadow: 5px 5px 10px #000;
+    color: rgb(21, 22, 20);
+}
+h3 {
+    /* margin-left: 50px; */
+    text-decoration: none;
 }
 
 #register {
@@ -27,7 +34,8 @@ h1 {
 }
 #login {
     width: 30em;
-    height: 30em;
+    height: 25em;
+    margin: 50px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -46,21 +54,71 @@ h1 {
     justify-content: center;
     align-items: center;
     text-align: center;
-    width: 90vw;
-    height: 90vh;
+    /* width: 100vw;
+    height: 100vh; */
     /* width: 100%;
     height: 100%; */
 }
 
-#uploader {
-    display: flex;
+#biouploader {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    /* display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    text-align: center;
+    text-align: center; */
+    /* -webkit-box-shadow: 67px 63px 112px -7px rgba(0, 0, 0, 0.68);
+    -moz-box-shadow: 67px 63px 112px -7px rgba(0, 0, 0, 0.68);
+    box-shadow: 67px 63px 112px -7px rgba(0, 0, 0, 0.68); */
+}
+
+#bio {
+    position: relative;
+    top: 300px;
+    width: 300px;
+    margin: 0 auto;
+    padding: 40px;
+    z-index: 2;
+    background: white;
+    -webkit-box-shadow: 67px 63px 112px -7px rgba(0, 0, 0, 0.68);
+    -moz-box-shadow: 67px 63px 112px -7px rgba(0, 0, 0, 0.68);
+    box-shadow: 67px 63px 112px -7px rgba(0, 0, 0, 0.68);
+}
+
+#uploader {
+    position: absolute;
     width: 100%;
     height: 100%;
-    /* background-color: blue; */
+    /* margin: auto; */
+    /* margin: 0 auto; */
+    /* height: 300px;
+    width: 300px; */
+    /* display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center; */
+    /* width: 15em;
+    height: 15em; */
+    -webkit-box-shadow: 67px 63px 112px -7px rgba(0, 0, 0, 0.68);
+    -moz-box-shadow: 67px 63px 112px -7px rgba(0, 0, 0, 0.68);
+    box-shadow: 67px 63px 112px -7px rgba(0, 0, 0, 0.68);
+}
+
+#up {
+    position: relative;
+    text-align: center;
+    top: -350px;
+    width: 300px;
+    margin: 0 auto;
+    padding: 50px;
+    z-index: 4;
+    background: white;
+    -webkit-box-shadow: 67px 63px 112px -7px rgba(0, 0, 0, 0.68);
+    -moz-box-shadow: 67px 63px 112px -7px rgba(0, 0, 0, 0.68);
+    box-shadow: 67px 63px 112px -7px rgba(0, 0, 0, 0.68);
 }
 
 #opp {
@@ -73,22 +131,40 @@ h1 {
     height: 90vh;
 }
 
+#display {
+    /* border: 1px solid black; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+#header {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    align-items: stretch;
+}
+
+#label {
+    font-size: 1.5em;
+}
 input {
+    width: 11.5em;
+    height: 2em;
+    font-size: 1.5em;
     margin-top: 10px;
-    padding: 10px;
-    border: 1px solid black;
-    width: 11em;
-    font-size: 1.5em;
+    /* padding: 10px; */
 }
 
-label {
-    margin-bottom: 10px;
-    padding: 10px;
-    border: 1px solid black;
-    width: 60%;
-    font-size: 1.5em;
+.input {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
 }
-
 button {
     cursor: pointer;
     background-color: black;
@@ -98,10 +174,13 @@ button {
     margin: 10px;
     width: 12em;
 }
-
+button:hover {
+    background-color: white;
+    color: black;
+}
 textarea {
     font-size: 1.5em;
-    width: 12em;
+    width: 10em;
     height: 2em;
 }
 
@@ -113,50 +192,18 @@ textarea {
     font-size: 20px;
 }
 
-.logo {
-    /* border-radius: 50%; */
-    width: 10em;
-    height: 10em;
-    position: relative;
-    top: 10px;
-    right: 0;
-}
+.small {
+    /* position: absolute; */
+    width: 7em;
+    height: 7em;
 
-.x {
-    top: 10px;
-    right: 10px;
-}
-
-#app {
-    position: relative;
-}
-
-#biouploader {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-}
-
-.small img {
-    position: absolute;
-    width: 10%;
-    top: 0;
-    right: 0;
     border-radius: 50%;
 }
-.big img {
-    position: relative;
-    width: 50%;
-
+.big {
+    /* position: relative; */
+    width: 30em;
     /* width: 100px;
     height: 100px; */
-}
-
-.header {
-    position: relative;
-    width: 100%;
 }
 
 .align {
@@ -168,7 +215,18 @@ textarea {
 }
 
 .links {
-    margin: 10px;
+    /* display: flex;
+    justify-content: space-around; */
+}
+
+.link-style {
+    text-decoration: none;
+    color: black;
+}
+
+.link-style:hover {
+    text-decoration: none;
+    color: yellow;
 }
 .pendingList {
     display: flex;
@@ -191,4 +249,105 @@ textarea {
     justify-content: center;
     align-items: center;
     text-align: center;
+}
+
+/* .welcomeLogo {
+    width: 9em;
+    height: 8em;
+    text-align: center;
+} */
+
+.logo {
+    /* border-radius: 50%; */
+    width: 7em;
+    height: 6em;
+    position: relative;
+    /* top: 10px;
+    right: 0; */
+}
+
+.onlineImage {
+    width: 15em;
+    height: 15em;
+}
+
+.pendingImg {
+    width: 20em;
+    height: 20em;
+}
+.friendImg {
+    width: 20em;
+    height: 20em;
+}
+
+.biotext {
+    width: 12em;
+}
+.button-links {
+    background-color: white;
+    color: black;
+    text-decoration: none;
+}
+
+.grow {
+    flex-grow: 1;
+}
+
+/* ////chat */
+.chatty {
+    padding-top: 1em;
+    /* background: black;
+    color: white;
+    width: 30em;
+    height: 10em; */
+}
+.display {
+}
+.time {
+}
+
+.chatsImage {
+    /* flex-grow: 1; */
+    position: relative;
+    float: left;
+    border: 1px black solid;
+    width: 5em;
+    height: 5em;
+    border-radius: 50%;
+}
+.write-message {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1em;
+    /* text-align: center; */
+}
+
+#chat {
+    width: 11.5em;
+}
+.chat-img-left {
+    margin: 10px;
+
+    /* align-self: start; */
+    /* float: left; */
+}
+.time {
+    flex-grow: 2;
+}
+.chats {
+    padding: 2em;
+    display: flex;
+    justify-content: space-around;
+    flex-flow: row wrap;
+    align-items: stretch;
+    /* flex-direction: column; */
+    /* justify-content: center; */
+    /* align-items: center; */
+    /* text-align: center; */
+    width: 30em;
+    /* height: 8em; */
+    background-color: rgb(170, 169, 165);
+    border: 1px black solid;
 }

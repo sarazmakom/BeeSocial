@@ -72,6 +72,22 @@ export function userJoined(newUser) {
     };
 }
 
+export function chatMessage(message) {
+    console.log("this is the 'payload'", message);
+    return {
+        type: "CHAT_MESSAGE",
+        message: message
+    };
+}
+
+export function chatMessages(messages) {
+    console.log("all messages", messages);
+    return {
+        type: "CHAT_MESSAGES",
+        messages: messages
+    };
+}
+
 // in actions
 // if (action.type == "USER_JOINED"){
 //     return{

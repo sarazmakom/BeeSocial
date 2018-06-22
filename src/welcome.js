@@ -8,11 +8,15 @@ export default Welcome;
 
 function Welcome() {
     return (
-        <div className="welcome">
+        <div id="welcome">
             <Logo />
-            <div id="welcome">
-                <h1> Bee nice</h1>
-                <h2>Be social, contact your friends.</h2>
+            <h1>social</h1>
+
+            <div>
+                <h2>
+                    Bee nice, <br />
+                    contact your friends.
+                </h2>
                 <HashRouter>
                     <div>
                         <Route exact path="/" component={Register} />

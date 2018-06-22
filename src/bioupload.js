@@ -34,8 +34,14 @@ export default class BioUpload extends React.Component {
     render() {
         return (
             <div id="biouploader">
-                <textarea name="newBio" onChange={this.handleInput} />
-                <button onClick={this.uploadBio}>Upload bio</button>
+                <div id="bio">
+                    <textarea
+                        className="biotext"
+                        name="newBio"
+                        onChange={this.handleInput}
+                    />
+                    <button onClick={this.uploadBio}>Upload bio</button>
+                </div>
             </div>
         );
     }

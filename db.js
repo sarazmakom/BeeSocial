@@ -130,6 +130,38 @@ exports.getUsersbyIds = function(arrayOfIds) {
     );
 };
 
+///chat
+
+exports.insertChats = function(id, message) {
+    return db.query(
+        `INSERT INTO chats (user_id, message)
+         VALUES ($1, $2)
+         RETURNING id, user_id, message, created_at`,
+        [id, message]
+    );
+};
+
+exports.getChats = function() {
+    return db.query(
+        `SELECT users.id, first, last, image_url, chats.id, user_id, message, chats.created_at FROM users
+        JOIN chats
+        ON users.id = user_id
+        ORDER BY created_at DESC LIMIT 10`
+    );
+};
+
+exports.returnChat = function(id) {
+    return db.query(
+        `SELECT users.id, first, last, image_url, message, chats.created_at FROM chats
+        LEFT JOIN users
+        ON users.id = user_id
+        WHERE chats.id = $1
+        `,
+        [id]
+    );
+};
+///endchat
+
 exports.hashPass = function(plainTextPassword) {
     return new Promise(function(resolve, reject) {
         bcrypt.genSalt(function(err, salt) {

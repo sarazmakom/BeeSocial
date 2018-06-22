@@ -270,6 +270,7 @@ server.listen(8080, function() {
 });
 
 let onlineUsers = {};
+let chatMessages = {};
 
 io.on("connection", function(socket) {
     console.log(`socket with the id ${socket.id} is now connected`);
@@ -283,6 +284,22 @@ io.on("connection", function(socket) {
 
     db.getUsersbyIds(Object.values(onlineUsers)).then(({ rows }) => {
         socket.emit("onlineUsers", rows);
+    });
+
+    db.getChats().then(({ rows }) => {
+        io.sockets.emit("chatMessages", rows.reverse());
+    });
+
+    let ids = Object.values(onlineUsers).filter(id => id == userId).length;
+
+    socket.on("chatMessage", message => {
+        console.log("index", message);
+        db.insertChats(userId, message).then(({ rows }) => {
+            let chatId = rows[0].id;
+            db.returnChat(chatId).then(({ rows }) => {
+                io.sockets.emit("chatMessage", rows[0]);
+            });
+        });
     });
 
     socket.on("disconnect", function() {

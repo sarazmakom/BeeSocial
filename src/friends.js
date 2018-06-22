@@ -24,8 +24,9 @@ class Friends extends React.Component {
                     {this.props.pending &&
                         this.props.pending.map(pending => {
                             return (
-                                <div className="pendingImg" key={pending.id}>
+                                <div key={pending.id}>
                                     <img
+                                        className="pendingImg"
                                         src={pending.image_url || "user.png"}
                                     />
                                     <div>

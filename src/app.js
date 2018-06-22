@@ -9,6 +9,7 @@ import BioUpload from "./bioupload";
 import OtherPersonProfile from "./other";
 import Friends from "./friends";
 import Online from "./online";
+import Chat from "./chat";
 // import { connect } from "react-redux";
 // import { getUserInfo } from "./actions";
 
@@ -74,21 +75,50 @@ export default class App extends React.Component {
         return (
             <BrowserRouter>
                 <div id="app">
-                    <div className="header">
-                        <Logo />
+                    <div id="header">
+                        <div className="grow">
+                            <Logo />
+                        </div>
 
-                        <div className="small">
+                        <h3 className="grow">
+                            <Link to="/" className="link-style">
+                                Profile
+                            </Link>
+                        </h3>
+                        <br />
+                        <h3 className="grow">
+                            <Link to="/friends" className="link-style">
+                                Friends
+                            </Link>
+                        </h3>
+                        <br />
+                        <h3 className="grow">
+                            <Link to="/online" className="link-style">
+                                Online
+                            </Link>
+                        </h3>
+                        <br />
+                        <h3 className="grow">
+                            <Link to="/chat" className="link-style">
+                                Chat
+                            </Link>
+                        </h3>
+                        <br />
+                        <h3 className="grow">
+                            <a href="/logout" className="link-style">
+                                Logout
+                            </a>
+                        </h3>
+
+                        <div>
                             <img
+                                className="small"
                                 src={this.state.profilePic}
                                 onClick={this.showUploader}
                             />
                         </div>
                     </div>
-                    <div className="links">
-                        <Link to="/friends">Friends</Link>
-                        <br />
-                        <Link to="/online">Online users</Link>
-                    </div>
+
                     <div>
                         <Route
                             exact
@@ -110,21 +140,18 @@ export default class App extends React.Component {
                             )}
                         />
                     </div>
-                    <Route exact path="/friends" component={Friends} />
-                    <Route exact path="/online" component={Online} />
 
-                    <div>
-                        <Route
-                            path="/users/:id"
-                            component={OtherPersonProfile}
-                        />
-                    </div>
                     {this.state.uploaderIsVisible && (
                         <Uploader
                             setImage={this.setImage}
                             onClick={this.hideUploader}
                         />
                     )}
+
+                    <Route exact path="/friends" component={Friends} />
+                    <Route exact path="/online" component={Online} />
+                    <Route exact path="/chat" component={Chat} />
+                    <Route path="/users/:id" component={OtherPersonProfile} />
                 </div>
             </BrowserRouter>
         );

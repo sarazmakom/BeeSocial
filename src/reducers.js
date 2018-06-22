@@ -49,6 +49,7 @@ export default function(state = {}, action) {
             onlineUsers: action.users
         });
     }
+
     if (action.type == "USER_JOINED") {
         if (state.onlineUsers) {
             state = Object.assign({}, state, {
@@ -56,12 +57,26 @@ export default function(state = {}, action) {
             });
         }
     }
+
     if (action.type == "USER_LEFT") {
         const newUsers = state.onlineUsers.filter(user => {
             return user.id != action.userId;
         });
         state = Object.assign({}, state, {
             onlineUsers: newUsers
+        });
+    }
+
+    if (action.type == "CHAT_MESSAGE") {
+        console.log("state from chat message ", state);
+        state = Object.assign({}, state, {
+            messages: [...state.messages, action.message]
+        });
+    }
+
+    if (action.type == "CHAT_MESSAGES") {
+        state = Object.assign({}, state, {
+            messages: action.messages
         });
     }
 
