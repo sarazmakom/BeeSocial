@@ -1,15 +1,16 @@
 * {
     /* background: rgb(83, 125, 163); */
     /* font-family: "Noto Serif", serif; */
-    font-family: "Song Myung", serif;
+    font-family: 'Ubuntu', sans-serif;
 }
 
 h1 {
-    font-family: "Ribeye", cursive;
+    /* font-family: "Ribeye", cursive; */
     font-size: 50px;
     text-align: center;
-    text-shadow: 5px 5px 10px #000;
+    text-shadow: 2px 2px 2px yellow;
     color: rgb(21, 22, 20);
+    margin-top:  0;
 }
 h3 {
     /* margin-left: 50px; */
@@ -179,6 +180,7 @@ button:hover {
     color: black;
 }
 textarea {
+    resize: none;
     font-size: 1.5em;
     width: 10em;
     height: 2em;
@@ -202,6 +204,7 @@ textarea {
 .big {
     /* position: relative; */
     width: 30em;
+    height: 30em;
     /* width: 100px;
     height: 100px; */
 }
@@ -226,7 +229,7 @@ textarea {
 
 .link-style:hover {
     text-decoration: none;
-    color: yellow;
+    text-shadow: 2px 2px 2px yellow;
 }
 .pendingList {
     display: flex;
@@ -293,7 +296,7 @@ textarea {
     flex-grow: 1;
 }
 
-/* ////chat */
+/* ////chat//// */
 .chatty {
     padding-top: 1em;
     /* background: black;
@@ -308,12 +311,13 @@ textarea {
 
 .chatsImage {
     /* flex-grow: 1; */
-    position: relative;
-    float: left;
+    /* position: relative;
+    float: left; */
     border: 1px black solid;
     width: 5em;
     height: 5em;
     border-radius: 50%;
+    /* align-self: baseline; */
 }
 .write-message {
     display: flex;
@@ -329,6 +333,7 @@ textarea {
 }
 .chat-img-left {
     margin: 10px;
+    border: black;
 
     /* align-self: start; */
     /* float: left; */
@@ -342,12 +347,13 @@ textarea {
     justify-content: space-around;
     flex-flow: row wrap;
     align-items: stretch;
+
     /* flex-direction: column; */
     /* justify-content: center; */
     /* align-items: center; */
     /* text-align: center; */
     width: 30em;
     /* height: 8em; */
-    background-color: rgb(170, 169, 165);
+    /* background-color: ; */
     border: 1px black solid;
 }

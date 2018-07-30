@@ -11,7 +11,6 @@ function Welcome() {
         <div id="welcome">
             <Logo />
             <h1>social</h1>
-
             <div>
                 <h2>
                     Bee nice, <br />
@@ -27,7 +26,7 @@ function Welcome() {
         </div>
     );
 }
-//
+////class example:////
 // class Welcome extends React.Component {
 //     render() {
 //         return (

@@ -29,10 +29,9 @@ class Friends extends React.Component {
                                         className="pendingImg"
                                         src={pending.image_url || "user.png"}
                                     />
-                                    <div>
-                                        {pending.first}
-                                        {pending.last}
-                                    </div>
+                                    <h3>
+                                        {pending.first} {pending.last}
+                                    </h3>
 
                                     <button
                                         onClick={() =>

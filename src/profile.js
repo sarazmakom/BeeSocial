@@ -19,7 +19,7 @@ export default class Profile extends React.Component {
                 </h1>
                 <div className="align">
                     <div>
-                        <ProfilePic
+                        <ProfilePic className="big"
                             url={this.props.profilePic}
                             onClick={this.props.showUploader}
                         />

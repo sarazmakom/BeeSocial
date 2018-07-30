@@ -5,4 +5,4 @@ CREATE TABLE chats (
     user_id INTEGER NOT NULL,
     message VARCHAR (1000) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-)
+);

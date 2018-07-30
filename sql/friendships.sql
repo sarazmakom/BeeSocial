@@ -7,4 +7,4 @@ CREATE TABLE friendships (
     status INTEGER,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP
-)
+);
